@@ -2,6 +2,8 @@
  * @lc app=leetcode id=1851 lang=cpp
  *
  * [1851] Minimum Interval to Include Each Query
+ * 
+ * NOTE: Alternative method also exists
  */
 
 #include <bits/stdc++.h>
