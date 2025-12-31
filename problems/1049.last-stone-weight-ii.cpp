@@ -5,6 +5,10 @@
  *
  * NOTE: For problems with complex behaviours, seek for a simple solution or
  * problem reduction.
+ * NOTE: The O(m) space optimised DP solution is kinda crazy, see how the reverse
+ * iteration prevents duplicate stones being used in future knapsack capacities wtf.
+ * Not just used for building from a certain starting point when choosing which
+ * direction to build from
  */
 
 #include <bits/stdc++.h>
