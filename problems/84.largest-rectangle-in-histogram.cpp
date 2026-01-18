@@ -11,23 +11,24 @@ using namespace std;
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
-        stack<pair<int, int>> heights_stack;
+        stack<int> heightsStack;
         int maxArea {0};
 
         heights.push_back(0); // Smallest height to trigger the area calculation.
 
         for (int i {0}; i < heights.size(); ++i) {
             const int h {heights[i]};
-            int leftMostI {i};
-
-            while (!heights_stack.empty() && heights_stack.top().second > h) {
-                auto [prevI, prevHeight] = heights_stack.top();
-                heights_stack.pop();
-                maxArea = max(maxArea, (i - prevI) * prevHeight);
-                leftMostI = prevI;
+            while (!heightsStack.empty() && heights[heightsStack.top()] > h) {
+                const int prevI = heightsStack.top();
+                const int prevHeight = heights[prevI];
+                heightsStack.pop();
+                maxArea = max(
+                    maxArea,
+                    heightsStack.empty() ? i * prevHeight : (i - heightsStack.top() - 1) * prevHeight
+                );
             }
 
-            heights_stack.push({leftMostI, h});
+            heightsStack.push(i);
         }
 
         return maxArea;
@@ -37,35 +38,61 @@ public:
 // class Solution {
 // public:
 //     int largestRectangleArea(vector<int>& heights) {
-//         stack<pair<int, int>> heights_stack;
-//         heights_stack.push({0, heights[0]});
+//         stack<pair<int, int>> heightsStack;
+//         int maxArea {0};
+
+//         heights.push_back(0); // Smallest height to trigger the area calculation.
+
+//         for (int i {0}; i < heights.size(); ++i) {
+//             const int h {heights[i]};
+//             int leftMostI {i};
+
+//             while (!heightsStack.empty() && heightsStack.top().second > h) {
+//                 auto [prevI, prevHeight] = heightsStack.top();
+//                 heightsStack.pop();
+//                 maxArea = max(maxArea, (i - prevI) * prevHeight);
+//                 leftMostI = prevI;
+//             }
+
+//             heightsStack.push({leftMostI, h});
+//         }
+
+//         return maxArea;
+//     }
+// };
+
+// class Solution {
+// public:
+//     int largestRectangleArea(vector<int>& heights) {
+//         stack<pair<int, int>> heightsStack;
+//         heightsStack.push({0, heights[0]});
         
 //         int maxArea = {0};
 //         heights.push_back(0); // Smallest height to trigger the area calculation.
 //         for (int i {1}; i < heights.size(); ++i) {
-//             if (!heights_stack.empty()) {
-//                 auto [prevI, prevHeight] = heights_stack.top();
+//             if (!heightsStack.empty()) {
+//                 auto [prevI, prevHeight] = heightsStack.top();
 
 //                 if (prevHeight > heights[i]) {
-//                     while (!heights_stack.empty() && prevHeight > heights[i]) {
+//                     while (!heightsStack.empty() && prevHeight > heights[i]) {
 //                         maxArea = max(maxArea, prevHeight * (i - prevI));
 //                         // cout << prevHeight << " " << i << " " << prevI << endl;
 //                         // cout << "new max area: " << maxArea << endl;
-//                         heights_stack.pop();
+//                         heightsStack.pop();
                         
-//                         if (!heights_stack.empty()) {
-//                             auto topPair = heights_stack.top();
+//                         if (!heightsStack.empty()) {
+//                             auto topPair = heightsStack.top();
 //                             if (topPair.second <= heights[i]) break;
 //                             prevI = topPair.first;
 //                             prevHeight = topPair.second;
 //                         }
 //                     }
-//                     heights_stack.push({prevI, heights[i]});
+//                     heightsStack.push({prevI, heights[i]});
 //                 } else {
-//                     heights_stack.push({i, heights[i]});
+//                     heightsStack.push({i, heights[i]});
 //                 }
 //             } else {
-//                 heights_stack.push({i, heights[i]});
+//                 heightsStack.push({i, heights[i]});
 //             }
 //         }
 
