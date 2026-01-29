@@ -2,6 +2,8 @@
  * @lc app=leetcode id=135 lang=cpp
  *
  * [135] Candy
+ * 
+ * NOTE: A one-pass O(1) space sol exists
  */
 
 #include <bits/stdc++.h>
