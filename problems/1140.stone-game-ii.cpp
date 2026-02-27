@@ -2,6 +2,8 @@
  * @lc app=leetcode id=1140 lang=cpp
  *
  * [1140] Stone Game II
+ * 
+ * NOTE: Most confusing part is the recursive step.
  */
 
 #include <bits/stdc++.h>
@@ -40,6 +42,8 @@ private:
 
         int result {0};
         for (int X {1}; X <= min(M * 2, (int)dp.size() - pileNo); ++X) {
+            // Optimise it for the current player (bob or alice, alternates)
+            // It achieves this by subtracting to get the other opponents score
             result = max(result, window[pileNo] - dfs(piles, dp, window, max(M, X), pileNo + X));
         }
 
