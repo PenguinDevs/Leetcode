@@ -7,6 +7,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// [1,1,1,2,3,7,8,1,6,9]
+// [1,1,1,2,3,7,8,6,1,9]
+
 // @lc code=start
 class Solution {
 public:
