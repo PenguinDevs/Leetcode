@@ -11,12 +11,22 @@ using namespace std;
 class Solution {
 public:
     int integerBreak(int n) {
-        auto canFit = [n](int target) -> bool {
+        vector<int> maxProducts(n + 1);
+        maxProducts[1] = 1;
 
-        };
+        for (int target {1}; target <= n; ++target) {
+            for (int currSubTarget {1}; currSubTarget < target; ++currSubTarget) {
+                const int prevSubTarget {target - currSubTarget};
+                // cout << currSubTarget << " " << prevSubTarget << '\n';
 
-        int l {0};
-        int r {n};
+                maxProducts[target] = max(
+                    max(maxProducts[target], currSubTarget * prevSubTarget),
+                    currSubTarget * maxProducts[prevSubTarget]
+                );
+            }
+        }
+
+        return maxProducts[n];
     }
 };
 // @lc code=end
